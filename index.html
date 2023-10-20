@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task-4</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+
+        #userTable {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            border: 1px solid white;
+        }
+
+        #userTable th {
+            border: 1px solid white;
+            padding: 8px;
+        }
+        #userTable td {
+            border: 1px solid white;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body style="background-color: black; color: white; text-align: center;">
+    <h1 style="text-align: center;">Dummy Data</h1>
+    <table style="column-gap: 2px; border: 1px solid white;" id="userTable">
+        <tbody>
+            <tr>
+                <th>Sno</th>
+                <th>Profile Pic</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Domain</th>
+                <th>IP</th>
+                <th>University</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>-</td>
+                <td>Terry</td>
+                <td>Medhurst</td>
+                <td>male</td>
+                <td>atuny0@sohu.com</td>
+                <td>atuny0</td>
+                <td>slashdot.org</td>
+                <td>117.29.86.254</td>
+                <td>Capitol Univsersity</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>-</td>
+                <td>Sheldon</td>
+                <td>Quigley</td>
+                <td>male</td>
+                <td>hbingley@plala.or.jp</td>
+                <td>hbingley</td>
+                <td>51.la</td>
+                <td>234.29.86.254</td>
+                <td>Star Tchnical Univsersity</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>-</td>
+                <td>ohn</td>
+                <td>adams</td>
+                <td>male</td>
+                <td>john123@yahoo.com</td>
+                <td>john123</td>
+                <td>slash.org</td>
+                <td>122.29.54.254</td>
+                <td>Duke Univsersity</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>-</td>
+                <td>Smith</td>
+                <td>Miles</td>
+                <td>male</td>
+                <td>smithm@hotmail.com</td>
+                <td>smithm</td>
+                <td>sm.org</td>
+                <td>117.29.86.112</td>
+                <td>Valley Univsersity</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchUserData() {
+            try {
+                const response = await fetch('https://dummyjson.com/users');
+                const data = await response.json();
+                const userTable = document.getElementById('userTable');
+                const tbody = userTable.querySelector('tbody');
+
+                data.forEach((user, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${user.profilePic}</td>
+                        <td>${user.firstName}</td>
+                        <td>${user.lastName}</td>
+                        <td>${user.gender}</td>
+                        <td>${user.email}</td>
+                        <td>${user.username}</td>
+                        <td>${user.domain}</td>
+                        <td>${user.ip}</td>
+                        <td>${user.university}</td>`;
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchUserData();
+    </script>
+</body>
+</html>
